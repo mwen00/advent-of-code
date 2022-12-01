@@ -14,19 +14,26 @@ INPUT_FILE = "./2022/day01/input.txt"
 
 TEST_ANSWER = [24000, 11000, 6000]
 
+top_three = []
 
 with open(INPUT_FILE, "r") as reader:
     data = reader.read()
     max = 0
-    sum = 0
+    sum_ = 0
 
     for i in data.split("\n"):
         if i == "":
-            max = sum if sum > max else max
-            sum = 0
+            max = sum_ if sum_ > max else max
+            top_three.append(sum_)
+                
+            sum_ = 0
             continue
 
-        sum += int(i)
+        sum_ += int(i)
 
-    print(max)
+    print(f"Max: {max}")
 
+top_three.sort(reverse=True)
+del top_three[3:]
+
+print(f"Top Three Total: {sum(top_three)}")
